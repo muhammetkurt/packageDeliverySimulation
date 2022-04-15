@@ -1,20 +1,22 @@
 package packageDeliverySimulation;
 
 public interface Building {
-
-	void take(int girdi);
 	
-	void process();
+	int as=0;
+	
+	void take(int input);
+	
+	int process();
 	
 	void showNumberOfProduct();
 	
 	void showProcessingSpeed();
 	
-	void increaseProcessingSpeed();
+	int increaseProcessingSpeed();
 	
 	void showCapacity();
 	
-	void increaseCapacity();
+	int increaseCapacity();
 	
 	void showIncreasingSpeedExpense();
 	
