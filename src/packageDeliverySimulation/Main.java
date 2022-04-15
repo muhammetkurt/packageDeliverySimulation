@@ -6,7 +6,7 @@ public class Main {
 		// TODO Auto-generated method stubas
 		
 		int a=0;
-		
+		int b=0;
 	}
 
 }
