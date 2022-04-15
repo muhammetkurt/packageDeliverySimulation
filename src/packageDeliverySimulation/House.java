@@ -11,9 +11,8 @@ public class House extends Player implements Building {
 	private Queue<Integer> productOfHouse = new LinkedList<Integer>();
 
 	private static int createID = 0;
-	private static int capacity = 0;
-	private static int numberOfProduct = 0;
-	private static int processingSpeed = 0;
+	private static int capacity = 5;
+	private static int processingSpeed = 1;
 	private static int increasingSpeedExpense = 300;
 	private static int increasingCapacityExpense = 300;
 	
@@ -25,20 +24,35 @@ public class House extends Player implements Building {
 	//constructor
 	public House() {
 		this.ID = createID;
-		createID++;
+		createID = createID + 1;
 	}
 	
 	
 	@Override
-	public void take(int input) {
+	public RETVAL take(int input) {
+		
+		if(productOfHouse.size() >= capacity) {
+			failureLimit = failureLimit - 1;
+			System.out.println("Capacity of House(ID: "+ ID +") full!");
+			
+			return RETVAL.DECREASE_BUDGET;
+		}
 		
 		productOfHouse.offer(input);
 		
-		System.out.println(input + " has been taken in House. ");
+		System.out.println(input + " has been taken in House(ID: "+ ID +")");
+		
+		return RETVAL.SUCCESS;
 	}
 
 	@Override
 	public int process() {
+		
+		if(productOfHouse.size() <= 0) {
+			
+			return RETVAL.NULL;
+			
+		}
 		
 		budget = budget + 100;
 		
@@ -59,7 +73,7 @@ public class House extends Player implements Building {
 	@Override
 	public void showNumberOfProduct() {
 
-		System.out.println("Number of product in House(ID: "+ ID +"): " + numberOfProduct);
+		System.out.println("Number of product in House(ID: "+ ID +"): " + productOfHouse.size());
 		
 	}
 
@@ -95,6 +109,8 @@ public class House extends Player implements Building {
 			processingSpeed = processingSpeed * 2 ;
 			
 			System.out.println("Processing speed is increased in House(ID: "+ ID +")");
+			
+			increasingSpeedExpense = increasingSpeedExpense * 2;
 		}
 		else {
 			System.out.println("Budget is not enough for increasing processing speed in House(ID:"+ ID +")");
@@ -109,9 +125,12 @@ public class House extends Player implements Building {
 		
 		if(budget >= increasingCapacityExpense) {
 			budget = budget - increasingCapacityExpense;
-			processingSpeed = processingSpeed * 2 ;
+			
+			capacity = capacity + 5 ;
 			
 			System.out.println("Capacity is increased in House(ID: "+ ID +")");
+			
+			increasingCapacityExpense = increasingCapacityExpense * 2;
 		}
 		else {
 			System.out.println("Budget is not enough for increasing capacity in House(ID:"+ ID +")");

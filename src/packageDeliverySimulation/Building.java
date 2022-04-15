@@ -2,9 +2,7 @@ package packageDeliverySimulation;
 
 public interface Building {
 	
-	int as=0;
-	
-	void take(int input);
+	RETVAL take(int input);
 	
 	int process();
 	

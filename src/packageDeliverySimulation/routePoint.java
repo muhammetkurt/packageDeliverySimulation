@@ -1,5 +1,5 @@
 package packageDeliverySimulation;
 
-public class routePoint {
+public class RoutePoint {
 
 }
